@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javohir PPT | Digital Architect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Outfit:wght@300;400;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #00f2fe;
+            --neon-pink: #ff007f;
+            --deep-bg: #030305;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            background: var(--deep-bg);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        /* Top Bar - Header */
+        .cyber-header {
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.8);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-text {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Slide Selection Sidebar */
+        .cyber-sidebar {
+            width: 260px;
+            background: rgba(255, 255, 255, 0.01);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .slide-preview {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.4s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .slide-preview:hover {
+            border-color: var(--accent);
+            background: rgba(0, 242, 254, 0.05);
+        }
+
+        .slide-preview.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent);
+        }
+
+        /* Main Canvas */
+        .canvas-container {
+            flex: 1;
+            background: radial-gradient(circle at center, #0a0a12 0%, #030305 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ppt-slide {
+            width: 80%;
+            aspect-ratio: 16/9;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Inputs */
+        .ppt-title-in {
+            background: transparent;
+            border: none;
+            border-left: 4px solid var(--accent);
+            color: #fff;
+            font-size: 3.5rem;
+            font-weight: 900;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            outline: none;
+            width: 100%;
+        }
+
+        .ppt-body-in {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.5rem;
+            padding-left: 24px;
+            outline: none;
+            width: 100%;
+            resize: none;
+        }
+
+        /* Buttons */
+        .btn-cyber {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            padding: 8px 20px;
+            transition: 0.3s;
+        }
+
+        .btn-cyber:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .btn-delete {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-delete:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        /* Play Mode Overlay */
+        #play-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 1000; display: none;
+            align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="cyber-header">
+        <div class="logo-text">Javohir // PPT.CORE</div>
+        <div class="d-flex gap-3">
+            <button class="btn-cyber" onclick="addSlide()">[+] New Slide</button>
+            <button class="btn-cyber btn-delete" onclick="deleteSlide()">[-] Delete</button>
+            <button class="btn-cyber" style="background: var(--accent); color: #000;" onclick="togglePlay()">Run Presentation</button>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside class="cyber-sidebar" id="sidebar">
+            </aside>
+
+        <main class="canvas-container">
+            <div class="ppt-slide" id="currentSlideElement">
+                <input type="text" class="ppt-title-in" id="titleInput" placeholder="SARLAVHA_" oninput="saveData()">
+                <textarea class="ppt-body-in" id="bodyInput" rows="5" placeholder="// ma'lumotlarni shu yerga kiriting..." oninput="saveData()"></textarea>
+            </div>
+        </main>
+    </div>
+
+    <div id="play-overlay" onclick="togglePlay()">
+        <div id="play-content" style="width: 90vw; text-align: center;"></div>
+    </div>
+    <script>
+        let slides = [
+            { id: 1, title: "SYSTEM READY", body: "Javohir PPT tizimiga xush kelibsiz. Bu yerda siz kelajak taqdimotlarini yaratasiz." }
+        ];
+        let activeId = 1;
+
+        function render() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = '';
+            
+            slides.forEach((s, i) => {
+                const div = document.createElement('div');
+                div.className = `slide-preview ${s.id === activeId ? 'active' : ''}`;
+                div.innerHTML = `SLIDE_0${i+1}`;
+                div.onclick = () => selectSlide(s.id);
+                sidebar.appendChild(div);
+            });
+
+            const current = slides.find(s => s.id === activeId);
+            document.getElementById('titleInput').value = current.title;
+            document.getElementById('bodyInput').value = current.body;
+        }
+
+        function selectSlide(id) {
+            activeId = id;
+            // Animatsiyani qayta ishga tushirish
+            const el = document.getElementById('currentSlideElement');
+            el.style.animation = 'none';
+            el.offsetHeight; 
+            el.style.animation = null;
+            render();
+        }
+
+        function addSlide() {
+            const newId = Date.now();
+            slides.push({ id: newId, title: "NEW_CORE", body: "" });
+            activeId = newId;
+            render();
+        }
+
+        function deleteSlide() {
+            if(slides.length > 1) {
+                slides = slides.filter(s => s.id !== activeId);
+                activeId = slides[0].id;
+                render();
+            }
+        }
+
+        function saveData() {
+            const current = slides.find(s => s.id === activeId);
+            current.title = document.getElementById('titleInput').value;
+            current.body = document.getElementById('bodyInput').value;
+        }
+
+        function togglePlay() {
+            const overlay = document.getElementById('play-overlay');
+            const content = document.getElementById('play-content');
+            
+            if(overlay.style.display === 'flex') {
+                overlay.style.display = 'none';
+            } else {
+                const current = slides.find(s => s.id === activeId);
+                content.innerHTML = `
+                    <h1 style="font-size: 8rem; font-family: 'Syncopate'; color: var(--accent);">${current.title}</h1>
+                    <p style="font-size: 2rem; opacity: 0.7;">${current.body}</p>
+                `;
+                overlay.style.display = 'flex';
+            }
+        }
+
+        render();
+    </script>
+
+</body>
+</html>
+

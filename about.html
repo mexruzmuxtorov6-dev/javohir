@@ -1,0 +1,139 @@
+<style>
+   /* GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ROOT COLORS */
+:root {
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.2);
+    --text: #ffffff;
+    --accent: #00d2ff;
+}
+
+/* BODY (ENG MUHIM QISM - ranglar shu yerda o‘zgaradi) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
+    color: var(--text);
+}
+
+/* CONTAINER */
+.container {
+    padding: 50px 10%;
+}
+
+/* TITLE */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--text);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    transition: 0.3s ease;
+    color: var(--text);
+}
+
+/* HOVER */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: var(--accent);
+}
+
+/* ICON */
+.card i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+/* SKILL */
+.skill-item {
+    margin-top: 15px;
+}
+
+.skill-item span {
+    font-size: 0.9rem;
+}
+
+/* BAR */
+.bar-bg {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    height: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--accent);
+    transition: width 0.5s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 5%;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}  
+</style>
+<div class="container" id="about">
+        <h2 class="section-title">Nimalarni bilaman?</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>HTML5, CSS3, JavaScript (Three.js) orqali interaktiv va shaffof interfeyslar yaratish.</p>
+                <div class="skill-item">
+                    <span>Frontend - 95%</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 95%;"></div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Cyber Security</h3>
+                <p>Penetration Testing, tarmoq xavfsizligi va axborotni himoya qilish (Kali Linux muhitida).</p>
+                <div class="skill-item">
+                    <span>Security - 85%</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>Hardware & IoT</h3>
+                <p>ESP32, BadUSB va mikrokontrollerlar bilan ishlash, dasturiy ta'minot yaratish.</p>
+                <div class="skill-item">
+                    <span>Hardware - 80%</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>

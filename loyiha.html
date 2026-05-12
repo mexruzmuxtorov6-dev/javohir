@@ -1,0 +1,102 @@
+<style>
+    /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ROOT (ASL RANGLAR) */
+:root {
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.2);
+    --text: #ffffff;
+    --accent: #00d2ff;
+}
+
+/* BODY (ENG MUHIM — background shu beradi) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
+    color: var(--text);
+}
+
+/* PROJECTS SECTION */
+#projects {
+    padding: 50px 10%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* TITLE */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* CARD (GLASS EFFECT) */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* HOVER */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: var(--accent);
+}
+
+/* CARD TEXT */
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    #projects {
+        padding: 30px 5%;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+</style>
+   <div class="container" id="projects" style="background: rgba(0,0,0,0.2);">
+        <h2 class="section-title">Loyihalar</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>3D Interactive System</h3>
+                <p>Three.js va Hand-tracking texnologiyasi asosida yaratilgan interaktiv vizualizatsiya.</p>
+            </div>
+            <div class="card">
+                <h3>BadUSB ESP32 Project</h3>
+                <p>ESP32-S3 asosidagi maxsus qurilma va uning firmware ta'minoti.</p>
+            </div>
+            <div class="card">
+                <h3>Network Lab</h3>
+                <p>Kali Linux-da tashkil etilgan xavfsiz server va port-forwarding tizimi.</p>
+            </div>
+        </div>
+    </div>
+

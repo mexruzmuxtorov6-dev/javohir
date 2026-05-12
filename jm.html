@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening Shaxsiy Albomim</title>
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #38bdf8;
+            --text: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            padding: 40px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .profile h1 { margin-top: 15px; font-size: 32px; }
+        .profile p { color: #94a3b8; }
+
+        .album-grid {
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .photo-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .caption {
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        /* CONTACT */
+        .contact {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .contact a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .contact a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .telegram {
+            background: #229ED9;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+        }
+
+        .phone {
+            background: #334155;
+        }
+
+        .contact a:hover {
+            opacity: 0.85;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .album-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Bo'limlarni vizual ko'rish uchun oddiy dizayn */
+        header, nav, main, section, footer {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        nav ul { list-style: none; display: flex; gap: 60px; padding: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="profile">
+        <img src="Mening rasmim.jpg">
+        <h1>Javohir Mahmudov</h1>
+        <p>Web Dasturchi</p>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="mjk.html">Bosh sahifa</a></li>
+            <li><a href="power.html">Power Point</a></li>
+            <li><a href="AI.html">Javohir AI</a></li>
+            <li><a href="foto.html">Foto montaj</a></li>
+            <li><a href="a.html">Aloqa</a></li>
+        </ul>
+    </nav>
+
+    <div class="album-grid">
+        
+        <div class="photo-item">
+            <img src="Kod yozish jarayoni.jpg">
+            <div class="caption">Kod yozish jarayoni</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="serverni buzish.jpg">
+            <div class="caption">Hakerlik jarayoni</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="AI.jpg">
+            <div class="caption">AI bilan ishlash</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="Java.jpg">
+            <div class="caption">Java</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="hakerB.jpg">
+            <div class="caption">Bitcoin</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IT.jpg">
+            <div class="caption">IT olami</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="raqamli dunyo.jpg">
+            <div class="caption">Raqamli dunyo</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="ish stolim.jpg">
+            <div class="caption">Ish stolim</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="haker1.jpg">
+            <div class="caption">Haker</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="mening ilk kodim.jpg">
+            <div class="caption">Mening ilk kodlarim</div>
+        </div>
+        <div class="photo-item">
+            <img src="money.jpg">
+            <div class="caption">Money</div>
+        </div>
+        <div class="photo-item">
+            <img src="pasword.jpg">
+            <div class="caption">Password</div>
+        </div>
+        
+
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact">
+        <h2>Bog'lanish</h2>
+
+        <a href="tel:+998501046756" class="phone">
+            <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
+            +998 (50) 104 67 56
+        </a>
+
+        <a href="https://t.me/_makhmudov_7j" target="_blank" class="telegram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
+            Telegram
+        </a>
+
+        <a href="https://instagram.com/_makhmudov_7j" target="_blank" class="instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+            Instagram
+        </a>
+    </div>
+
+    <footer>
+        <p>Javohir | Shaxsiy Web Albom &copy; 2026</p>
+    </footer>
+
+</body>
+</html>

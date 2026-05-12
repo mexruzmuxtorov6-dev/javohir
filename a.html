@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY (ORQA FON) */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
+    color: white;
+}
+
+/* SECTION */
+.contact-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* GLASS CARD */
+.glass-contact-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 50px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* TITLE */
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* TEXT */
+.desc {
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* ITEM */
+.contact-item {
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* HOVER */
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-10px) scale(1.03);
+    border-color: #00f2fe;
+    box-shadow: 0 15px 30px rgba(0, 242, 254, 0.3);
+}
+
+/* ICON */
+.contact-item i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/* ICON COLORS */
+.tg-icon { color: #00f2fe; }
+.inst-icon { color: #ff4ecd; }
+.phone-icon { color: #00ffae; }
+
+/* TEXT */
+.contact-item h5 {
+    margin-bottom: 5px;
+}
+
+.contact-item span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 40px;
+    opacity: 0.5;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .glass-contact-card {
+        padding: 30px 20px;
+    }
+
+    .contact-title {
+        font-size: 1.8rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="contact-section">
+    <div class="glass-contact-card">
+        <h2 class="contact-title">Biz bilan bog'lanish</h2>
+        <p class="desc">Savollaringiz bormi? Quyidagi usullar orqali bizga murojaat qiling.</p>
+
+        <div class="contact-grid">
+
+            <a href="https://t.me/_makhmudov_7j" target="_blank" class="contact-item">
+                <i class="fab fa-telegram tg-icon"></i>
+                <h5>Telegram</h5>
+                <span>@_makhmudov_7j</span>
+            </a>
+
+            <a href="https://instagram.com/_makhmudov_7j" target="_blank" class="contact-item">
+                <i class="fab fa-instagram inst-icon"></i>
+                <h5>Instagram</h5>
+                <span>@_makhmudov_7j</span>
+            </a>
+
+            <a href="tel:+998501046756" class="contact-item">
+                <i class="fas fa-phone-alt phone-icon"></i>
+                <h5>Telefon</h5>
+                <span>+998 (50) 104 67 56</span>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            <small>© 2026 Barcha huquqlar himoyalangan</small>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEXRUZ | Neural Studio Pro</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #00f2fe;
+            --dark-panel: #0a0a0c;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: #030305;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 🛠 INTERFEYS TUZILISHI */
+        .studio-wrapper {
+            display: grid;
+            grid-template-columns: 80px 300px 1fr 280px;
+            height: 100vh;
+        }
+
+        /* 1. Chap asboblar paneli (Toolbar) */
+        .toolbar {
+            background: var(--dark-panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 25px;
+        }
+
+        .tool-btn {
+            color: rgba(255,255,255,0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tool-btn:hover, .tool-btn.active {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* 2. Sozlamalar paneli (Properties) */
+        .properties-panel {
+            background: #0d0d0f;
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* 3. Markaziy Ishchi Maydoni (Workspace) */
+        .workspace {
+            background: #141417;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: auto;
+        }
+
+        #canvas-container {
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            background-image: linear-gradient(45deg, #1d1d21 25%, transparent 25%), 
+                              linear-gradient(-45deg, #1d1d21 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #1d1d21 75%), 
+                              linear-gradient(-45deg, transparent 75%, #1d1d21 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        /* 4. Qatlamlar paneli (Layers) */
+        .layers-panel {
+            background: var(--dark-panel);
+            border-left: 1px solid var(--border);
+            padding: 15px;
+        }
+
+        .layer-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Neon Inputlar */
+        input[type="range"] { accent-color: var(--accent); }
+        
+        .btn-neon {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="studio-wrapper">
+        <div class="toolbar">
+            <div class="tool-btn active" title="Move"><i class="fas fa-mouse-pointer"></i></div>
+            <div class="tool-btn" onclick="addText()" title="Text"><i class="fas fa-font"></i></div>
+            <div class="tool-btn" onclick="triggerUpload()" title="Add Image"><i class="fas fa-image"></i></div>
+            <div class="tool-btn" title="Crop"><i class="fas fa-crop-alt"></i></div>
+            <div class="tool-btn" title="Draw"><i class="fas fa-paint-brush"></i></div>
+            <hr class="w-75 border-secondary">
+            <div class="tool-btn text-danger" onclick="deleteObject()"><i class="fas fa-trash"></i></div>
+        </div>
+
+        <div class="properties-panel">
+            <h6 class="text-info small mb-4 fw-bold">SOZLAMALAR</h6>
+            
+            <label class="small opacity-50 d-block mb-2">BRIGHTNESS</label>
+            <input type="range" id="bright" class="form-range mb-4" min="-1" max="1" step="0.1" value="0">
+
+            <label class="small opacity-50 d-block mb-2">SATURATION</label>
+            <input type="range" id="saturate" class="form-range mb-4" min="-1" max="1" step="0.1" value="0">
+
+            <hr class="border-secondary">
+            <h6 class="text-info small mb-3 fw-bold">EKSPORT</h6>
+            <a href="about.html" class="btn-neon mb-2">ORTGA QAYTSH </a>
+            <button class="btn-neon" onclick="downloadCanvas()">SAVE IMAGE (PNG)</button>
+        </div>
+
+        <div class="workspace">
+            <div id="canvas-container">
+                <canvas id="mainCanvas"></canvas>
+            </div>
+            <input type="file" id="imgLoader" hidden>
+        </div>
+
+        <div class="layers-panel">
+            <h6 class="text-info small mb-4 fw-bold">QATLAMLAR (LAYERS)</h6>
+            <div id="layerList">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script>
+        // 1. Canvasni ishga tushirish
+        const canvas = new fabric.Canvas('mainCanvas', {
+            width: 800,
+            height: 600,
+            backgroundColor: '#ffffff'
+        });
+
+        // 2. Rasm yuklash funksiyasi
+        function triggerUpload() {
+            document.getElementById('imgLoader').click();
+        }
+
+        document.getElementById('imgLoader').onchange = function(e) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                fabric.Image.fromURL(event.target.result, function(img) {
+                    img.scaleToWidth(400);
+                    canvas.add(img);
+                    canvas.setActiveObject(img);
+                    updateLayers();
+                });
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        // 3. Matn qo'shish (Photoshop uslubida)
+        function addText() {
+            const text = new fabric.IText('Matnni tahrirlang', {
+                left: 100,
+                top: 100,
+                fontFamily: 'Outfit',
+                fill: '#000000',
+                fontSize: 40
+            });
+            canvas.add(text);
+            updateLayers();
+        }
+
+        // 4. Filtrlar (Neural Engine)
+        document.getElementById('bright').oninput = function() {
+            const obj = canvas.getActiveObject();
+            if (obj && obj.type === 'image') {
+                obj.filters[0] = new fabric.Image.filters.Brightness({ brightness: parseFloat(this.value) });
+                obj.applyFilters();
+                canvas.renderAll();
+            }
+        };
+
+        // 5. Qatlamlarni yangilash funksiyasi
+        function updateLayers() {
+            const list = document.getElementById('layerList');
+            list.innerHTML = '';
+            canvas.getObjects().forEach((obj, index) => {
+                const item = document.createElement('div');
+                item.className = 'layer-item';
+                item.innerHTML = `<span>Layer ${index + 1} (${obj.type})</span> <i class="fas fa-eye small"></i>`;
+                list.prepend(item);
+            });
+        }
+
+        // 6. Obyektni o'chirish
+        function deleteObject() {
+            const active = canvas.getActiveObject();
+            if (active) {
+                canvas.remove(active);
+                updateLayers();
+            }
+        }
+
+        // 7. Rasmni saqlash
+        function downloadCanvas() {
+            const dataURL = canvas.toDataURL({
+                format: 'png',
+                quality: 1
+            });
+            const link = document.createElement('a');
+            link.download = 'mexruz-neural-design.png';
+            link.href = dataURL;
+            link.click();
+        }
+
+        // Obyekt qo'shilganda qatlamlarni yangilab turish
+        canvas.on('object:added', updateLayers);
+    </script>
+</body>
+</html>

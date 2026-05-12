@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfoliyo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.2);
+            --text: #ffffff;
+            --accent: #00d2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f3460);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigatsiya */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 10%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; color: var(--accent); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Asosiy qism (Hero) */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; max-width: 600px; opacity: 0.8; margin-bottom: 30px; }
+
+        /* Glass Card Container */
+        .container {
+            padding: 50px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* Tugmalar */
+        .btn {
+            padding: 12px 35px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.4s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        /* Skills bar qismi */
+        .skill-item { margin-bottom: 15px; }
+        .bar-bg { background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px; margin-top: 5px; }
+        .bar-fill { background: var(--accent); height: 100%; border-radius: 10px; box-shadow: 0 0 10px var(--accent); }
+
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.9rem; }
+ @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+            <li><a href="#home">Asosiy</a></li>
+            <li><a href="about.html">Mahoratlar</a></li>
+            <li><a href="loyiha.html">Loyihalar</a></li>
+            <li><a href="a.html">Aloqa</a></li>
+            <li><a href="jm.html">Haqida</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Assalomu Alaykum!</h1>
+        <p>Men Full-Stack Dasturchi va Kiberxavfsizlik mutaxassisiman. Zamonaviy web-ilovalar va xavfsiz tizimlar yaratish bilan shug'ullanaman.</p>
+        <a href="jm.html" class="btn">Ishlarimni ko'ring</a>
+    </section> 
+    <footer>
+        <p>&copy; 2026 Barcha huquqlar himoyalangan. Dasturchi: Javohir</p>
+    </footer>
+
+</body>
+</html>
